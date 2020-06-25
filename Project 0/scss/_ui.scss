@@ -1,0 +1,35 @@
+$buttonPadding: 0.65rem 1.2rem;
+$borderStyle: 1px solid rgb(196, 196, 196);
+
+input[type="submit"] {
+  background: rgb(233, 233, 233);
+  padding: $buttonPadding;
+  border: 1px solid transparent;
+  font-size:14px;
+  color: $textColor;
+  font-weight: lighter;
+  border-radius: 5px;
+
+  &:hover{
+     border: 1px solid rgb(196, 196, 196);
+  }
+
+  & + & {
+    margin-left: 0.3rem;
+  }
+}
+
+input[name="q"]{
+    padding: 0.75rem 1rem;
+    border: $borderStyle;
+    width: 500px;
+    border-radius: 2rem;
+    display: block;
+    margin: 0 auto 1.5rem auto;
+    outline:none;
+    position: relative;
+
+    &:hover{
+        box-shadow: 0 0 6px 3px rgb(228, 228, 228);
+    }
+ }
