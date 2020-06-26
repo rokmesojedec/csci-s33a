@@ -19,17 +19,18 @@ input[type="submit"] {
   }
 }
 
+
+
 input[name="q"] {
   padding: 0.75rem 1rem;
   border: $borderStyle;
   width: 500px;
-  border-radius: 2rem;
+  border-radius: $spacing * 2;
   display: block;
   margin: 0 auto 0 auto;
   outline: none;
   position: relative;
   text-indent: 1.5rem;
-
   &:hover {
     box-shadow: 0 0 6px 3px rgb(228, 228, 228);
   }

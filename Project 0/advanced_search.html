@@ -1,13 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Search</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <form action="https://google.com/search">
-            <input type="text" name="q">
-            <input type="submit" value="Google Search">
-        </form>
-    </body>
+
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/advanced_search.css">
+    <title>Google Advanced Search</title>
+    <!-- Icon Downloaded from https://www.iconfinder.com/icons/682665/favicon_google_logo_new_icon -->
+    <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
+</head>
+
+<body class="advanced_search">
+    <div class="top">
+        <a href="index.html"><img src="img/googlelogo_color_272x92dp.png" alt="Google logo" height="32"></a>
+        <a href="index.html">Search</a>
+    </div>
+    <h1>Advanced Search</h1>
+    <form action="https://google.com/search">
+
+        <div class="row">
+            <h2>Find pages with...</h2>
+            <h3>To do this in the search box.</h3>
+        </div>
+        <div class="row"><label for="as_q">all these words: </label>
+            <input type="text" name="as_q">
+            <span class="description">Type the important words: <span class="example">tri-colour rat
+                    terrier</span></span>
+        </div>
+        <div class="row"><label for="as_epq">this exact word or phrase:</label>
+            <input type="text" name="as_epq">
+            <span class="description">Put exact words in quotes: <span class="example">"rat terrier"</span></span>
+        </div>
+        <div class="row"><label for="as_oq">any of these words:</label>
+            <input type="text" name="as_oq">
+            <span class="description">Type <span class="example">OR</span> between all the words you want: <span
+                    class="example">miniature OR standard</span></span>
+        </div>
+        <div class="row"><label for="as_eq">none of these words:</label>
+            <input type="text" name="as_eq">
+            <span class="description">Put a minus sign just before words that you don't want: <span
+                    class="example">-rodent,
+                    -"Jack Russell"</span>
+            </span>
+        </div>
+        <input type="submit" class="advanced" value="Advanced Search">
+    </form>
+</body>
+
 </html>

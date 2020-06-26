@@ -1,10 +1,14 @@
-
 // Google Button Blue
 // Source: https://www.google.com/advanced_search via code inspector
-$blue : #4d90fe;
-$gray : rgb(114, 114, 114);
+$blue: #4d90fe;
+$gray: rgb(114, 114, 114);
+$red: rgb(216, 39, 39);
+$lightGray : rgb(233, 233, 233);
 
 $textColor: $gray;
+$headingRed: $red;
 // Source: https://www.google.com via code inspector
-$borderColor : #dfe1e5;
-$borderStyle : 1px solid $borderColor;
+$borderColor: #dfe1e5;
+$borderStyle: 1px solid $borderColor;
+
+$spacing: 1rem;

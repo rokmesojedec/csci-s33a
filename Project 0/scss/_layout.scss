@@ -1,10 +1,18 @@
+%wrapper {
+    display: inline-block;
+    position: relative;
+}
+
+%removeSpacing{
+    padding:0;
+    margin:0;
+}
+
 .block-wrapper {
     display: block;
-    padding: 0;
-    margin: 0;
+    @extend %removeSpacing;
     .input-wrapper {
-        display: inline-block;
-        position: relative;
+        @extend %wrapper;
         margin-bottom: 1.5rem;
         .icon {
             position: absolute;
@@ -13,31 +21,35 @@
             height: 20px;
             color: $textColor;
             z-index: 1;
-            left: 1rem;
+            left: $spacing;
             transform: translate(0, -50%);
-            svg{
+            svg {
                 fill: gray;
             }
         }
     }
 }
 
+.logo-wrapper {
+    @extend %wrapper;
+    @extend %removeSpacing;
+}
+
 nav {
     ul {
         display: flex;
         align-items: flex-start;
-        padding: 0;
         justify-content: flex-end;
+        padding: 0;
         li {
             list-style: none;
             display: inline;
             &:last-of-type {
-                margin-right: 1rem;
+                margin-right: $spacing;
             }
         }
-
         li + li {
-            margin-left: 1rem;
+            margin-left: $spacing;
         }
     }
 }
