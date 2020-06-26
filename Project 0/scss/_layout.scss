@@ -1,0 +1,43 @@
+.block-wrapper {
+    display: block;
+    padding: 0;
+    margin: 0;
+    .input-wrapper {
+        display: inline-block;
+        position: relative;
+        margin-bottom: 1.5rem;
+        .icon {
+            position: absolute;
+            top: 55%;
+            width: 20px;
+            height: 20px;
+            color: $textColor;
+            z-index: 1;
+            left: 1rem;
+            transform: translate(0, -50%);
+            svg{
+                fill: gray;
+            }
+        }
+    }
+}
+
+nav {
+    ul {
+        display: flex;
+        align-items: flex-start;
+        padding: 0;
+        justify-content: flex-end;
+        li {
+            list-style: none;
+            display: inline;
+            &:last-of-type {
+                margin-right: 1rem;
+            }
+        }
+
+        li + li {
+            margin-left: 1rem;
+        }
+    }
+}
