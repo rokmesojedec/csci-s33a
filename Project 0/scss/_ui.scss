@@ -11,7 +11,7 @@ input[type="submit"] {
   border-radius: 5px;
 
   &:hover {
-    border: 1px solid rgb(196, 196, 196);
+    border: $borderStyle;
   }
 
   & + & {
@@ -19,10 +19,8 @@ input[type="submit"] {
   }
 }
 
-
-
 input[name="q"] {
-  padding: 0.75rem 1rem;
+  padding: 0.75rem $spacing;
   border: $borderStyle;
   width: 500px;
   border-radius: $spacing * 2;
@@ -34,4 +32,19 @@ input[name="q"] {
   &:hover {
     box-shadow: 0 0 6px 3px rgb(228, 228, 228);
   }
+}
+
+input[type="text"] {
+  padding: 0.45rem $spacing;
+  width: $inputWidth;
+  border: $borderStyle;
+}
+
+input[type="submit"].advanced {
+  background: $blue;
+  color: white;
+  position: absolute;
+  left: $labelInputWidth + $spacing;
+  margin-top: $spacing;
+  transform: translate(-100%, 0);
 }

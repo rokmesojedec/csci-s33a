@@ -1,4 +1,6 @@
 @import "variables";
+@import "base";
+@import "ui";
 
 $labelWidth: 10rem;
 $inputWidth: 30rem;
@@ -13,7 +15,13 @@ $labelInputWidth: $labelWidth + $inputWidth + $spacing * 4;
     }
 }
 
-.advanced_search {
+%headingPrototype {
+    font-weight: normal;
+    display: inline-block;
+}
+
+.advanced_search 
+{
     .top {
         display: flex;
         justify-content: space-between;
@@ -21,6 +29,7 @@ $labelInputWidth: $labelWidth + $inputWidth + $spacing * 4;
         background-color: $lightGray;
         padding: $spacing;
     }
+
     h1 {
         color: $headingRed;
         padding: $spacing;
@@ -29,8 +38,26 @@ $labelInputWidth: $labelWidth + $inputWidth + $spacing * 4;
         font-weight: normal;
         font-size: 18px;
         border-bottom: 1px solid $lightGray;
-        margin-bottom: 1rem;
+        margin-bottom: $spacing;
     }
+
+    h2,
+    h3 {
+        @extend %headingPrototype;
+    }
+
+    h2 {
+        width: $labelWidth + $inputWidth + 4 * $spacing;
+        margin-left: $spacing;
+        font-size: 16px;
+        margin-top: 2 * $spacing;
+    }
+
+    h3 {
+        font-weight: bold;
+        color: $gray;
+    }
+
     .row {
         text-align: left;
         padding-left: $spacing;
@@ -64,20 +91,5 @@ $labelInputWidth: $labelWidth + $inputWidth + $spacing * 4;
             font-size: larger;
             color: $gray;
         }
-    }
-    h2,
-    h3 {
-        font-weight: normal;
-        display: inline-block;
-    }
-    h2 {
-        width: $labelWidth + $inputWidth + 4 * $spacing;
-        margin-left: $spacing;
-        font-size: 16px;
-        margin-top: 2 * $spacing;
-    }
-    h3 {
-        font-weight: bold;
-        color: $gray;
     }
 }
