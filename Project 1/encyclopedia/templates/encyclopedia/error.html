@@ -1,0 +1,14 @@
+{% extends "encyclopedia/layout.html" %}
+{% block title %}
+    {{error_type | title}}  
+{% endblock %}
+
+{% block body %}
+{% if error_type == "duplicate" %}
+    <h1>Duplicate Entry Error</h1>
+    <p>Entry <strong>{{title}}</strong> already exists in the system
+{% elif error_type == "404" %}
+    <h1>404 - Page not found</h1>
+    <p>We are sorry, but the entry <strong>{{title}}</strong> that you are trying to access does not exist.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    {% if q is None %}
+        <h1>All Pages</h1>
+    {% else %}
+        <h1>Search Results</h1>
+    {% endif %}
+    <ul>
+        {% if entries %}
+        {% for entry in entries %}
+            <li><a href="{% url 'encyclopedia:entry' entry_title=entry %}">{{ entry }}</a> (<a href="{% url 'encyclopedia:edit' entry_title=entry %}">edit</a>)</li>
+        {% endfor %}
+        {% else %}
+            No entries found for <strong>{{ q }}</strong>.
+        {% endif%}
+    </ul>
+
+{% endblock %}

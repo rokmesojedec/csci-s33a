@@ -1,0 +1,22 @@
+{% extends "encyclopedia/layout.html" %}
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block body %}
+{% if crud_type == "edit" %}
+    <h1>Edit {{title}}</h1>
+    <form action="{% url 'encyclopedia:edit' entry_title=title %}" method="post">
+{% elif crud_type == "add" %}
+    <h1>Add Entry</h1>
+    <form action="{% url 'encyclopedia:add' %}" method="post">
+{% endif %}
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% if crud_type == "edit" %}
+        <input type="submit" value="Update Entry" />
+    {% elif crud_type == "add" %}
+        <input type="submit" value="Submit Entry" />
+    {% endif %}
+</form>
+{% endblock %}
