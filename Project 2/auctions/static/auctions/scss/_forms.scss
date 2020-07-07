@@ -1,0 +1,23 @@
+form {
+    label {
+        width: 20vw;
+    }
+
+    input, textarea, select{
+        width: 75vw;
+    }
+
+    input[type="submit"]{
+        width: initial;
+    }
+
+    p{
+        display: flex;
+        align-items: flex-start;
+        input[type="submit"]{
+            text-align: right;
+            margin-left:95vw;
+            transform: translate(-100%,0);
+        }
+    }
+}

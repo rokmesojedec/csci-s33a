@@ -1,0 +1,34 @@
+$image_width : 15 * $spacing_unit;
+div.listings{
+    h3{
+        font-weight: 100;
+    }
+    div{
+        padding: $spacing_unit;
+        margin-bottom: $spacing_unit;
+        border-radius: $spacing_unit;
+        @include clearfix();
+        div.image{
+            width: $image_width;
+            height: $image_width;
+            display:flex;
+            align-content: space-around;
+            float:left;
+            margin:0 $spacing_unit * 2 0 0 ;
+            overflow: hidden;
+            padding:0;
+            img{
+                width:$image_width;
+                align-self: center;
+            }
+        }
+        time{
+            font-size: x-small;
+            color: $text_gray;
+            i{
+                font-size: 14px;
+                vertical-align: sub;
+            }
+        }
+    }
+}

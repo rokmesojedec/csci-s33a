@@ -1,0 +1,42 @@
+body {
+    font-family: Montserrat, sans-serif;
+    color: $text_color; 
+    & > *{
+        padding: $layout_padding;
+    }
+}
+
+h1,h2,h3,h4,h5,h6{
+    color: $secondary_accent;
+    font-family: Roboto, sans-serif;
+}
+
+h1, h2{
+    text-transform: uppercase;
+}
+
+a{
+    color: $link_color;
+}
+
+section.header {
+    position: relative;
+    padding-top: $spacing_unit *2;
+
+    .login{
+        position: absolute;
+        top: $spacing_unit *2;
+        right: $spacing_unit * 5;
+    }
+
+    h1{
+        color: $primary_accent;
+        font-weight: 700;
+        span{
+            font-weight: 100;
+        }
+    }
+    
+    background: $secondary_accent;
+    color: white;
+}

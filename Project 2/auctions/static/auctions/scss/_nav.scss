@@ -1,0 +1,27 @@
+
+ul.nav{
+    margin-bottom: $spacing_unit;
+
+    a{
+        color: white;
+    }
+
+    li{
+        border: $border_style;
+        border-radius: $spacing_unit $spacing_unit 0 0;
+        border-bottom: none;
+
+        &.selected{
+            a{
+                color: $secondary_accent;
+                font-weight: bold;
+            }
+            background: white;
+            border: none;
+        }
+    }
+
+    li + li {
+        margin-left: $spacing_unit / 2;
+    }
+}
