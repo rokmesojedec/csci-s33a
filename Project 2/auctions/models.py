@@ -1,3 +1,4 @@
+""" Models used in auctions app """
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.forms import ModelForm
@@ -14,18 +15,21 @@ from crispy_forms.bootstrap import PrependedText
 
 
 class Category(models.Model):
+    """ category model """
     title = models.CharField(max_length=256, unique=True)
 
     def __str__(self):
-        return self.title
+        return f"{self.title}"
 
 
 class User(AbstractUser):
+    """ user model """
     def __str__(self):
         return f"{self.username}"
 
 
 class Listing(models.Model):
+    """ listing model """
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="listing_author", editable=False)
     title = models.CharField(max_length=256)
@@ -33,21 +37,23 @@ class Listing(models.Model):
     created = models.DateTimeField(auto_now_add=True, blank=True)
     initial_bid = models.DecimalField(default=0, max_digits=10, decimal_places=2)
     image_URL = models.URLField(blank=True)
-    categories = models.ManyToManyField(
-        Category, blank=True, related_name="category_items")
-    wishlist = models.ManyToManyField(
-        User, blank=True, related_name="wishlist_user")
+    category = models.ForeignKey(
+        Category, blank=True, null=True, related_name="category_items", on_delete=models.SET_NULL)
+    watchlist = models.ManyToManyField(
+        User, blank=True, related_name="watchlist_user")
+    bids = models.ManyToManyField(User, through="Bid", blank=True, related_name="bids")
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.title}"
 
 
-# Create Form from model
-# source: https://docs.djangoproject.com/en/3.0/topics/forms/modelforms/
 class ListingForm(ModelForm):
-    class Meta: 
+    """ listing model form """
+    class Meta:
+        """ listing form meta class """
         model = Listing
-        fields = ["title", "description", "initial_bid", "image_URL", "categories"]
+        fields = ["title", "description", "initial_bid", "image_URL", "category"]
     helper = FormHelper()
     helper.form_class = "form-group"
     helper.layout = Layout(
@@ -55,12 +61,13 @@ class ListingForm(ModelForm):
         Field("description", rows="3", css_class="form-control mb-3"),
         PrependedText("initial_bid", "€", css_class="mb-3"),
         Field("image_URL", css_class="form-control mb-3"),
-        Field("categories", css_class="form-control mb-3"),
-        Submit("add_listing", "Add Listing")
+        Field("category", css_class="form-control mb-3"),
+        Submit("add_listing", "Create Listing")
     )
 
 
 class Bid(models.Model):
+    """ bid model """
     bidder = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="bid_author")
     item = models.ForeignKey(
@@ -73,7 +80,9 @@ class Bid(models.Model):
 
 
 class BidForm(ModelForm):
+    """ bid form model """
     class Meta:
+        """ bid form meta class """
         model = Bid
         fields = ["amount"]
     helper = FormHelper()
@@ -86,6 +95,7 @@ class BidForm(ModelForm):
 
 
 class Comment(models.Model):
+    """ comment model """
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="comment_author")
     item = models.ForeignKey(
@@ -95,7 +105,9 @@ class Comment(models.Model):
 
 
 class CommentForm(ModelForm):
-    class Meta: 
+    """ comment form model """
+    class Meta:
+        """ comment form meta class """
         model = Comment
         fields = ["content"]
     helper = FormHelper()

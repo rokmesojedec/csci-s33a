@@ -1,7 +1,7 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <form action="{% url 'add_listing'%}" method="post" class="mt-3">
+    <form action="{% url 'create_listing'%}" method="post" class="mt-3">
     {% load crispy_forms_tags %}
         {% csrf_token %}
         {% crispy form %}

@@ -6,4 +6,8 @@ Placeholder image downloaded from [https://www.shopify.com/partners/blog/placeho
 
 ## Installation
 
-Please run `pip3 install django-crispy-forms` before running this app
+Please run `pip3 install django-crispy-forms` and `pip3 install djang` before running this app
+
+## Start script
+
+`python3 manage.py runserver`

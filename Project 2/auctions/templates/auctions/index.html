@@ -21,8 +21,8 @@
                 {% endif %}
                 </div>
                 <h3><a href="{% url 'listing' listing_id=listing.id %}"> {{ listing.title }} </a></h3>
-                <strong>Price:</strong> €{{ listing.initial_bid }}
-                <p> {{ listing.description }} </p>
+                <strong>Price:</strong> €{{ listing.current_bid }}
+                <p class="description"> {{ listing.description }} </p>
                 <time><i class="material-icons-outlined">schedule</i> {{ listing.created }} </time>
             </div>
         {% endfor %}

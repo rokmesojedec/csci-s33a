@@ -10,6 +10,15 @@ h1,h2,h3,h4,h5,h6{
     color: $secondary_accent;
     font-family: Roboto, sans-serif;
 }
+.description{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.alert{
+    background: $primary_accent;
+    color: white;
+}
 
 h1, h2{
     text-transform: uppercase;

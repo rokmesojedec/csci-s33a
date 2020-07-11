@@ -28,7 +28,7 @@
                     </li>
                     {% if user.is_authenticated %}
                         <li class="nav-item {% if selected == 'add' %}selected{% endif %}">
-                            <a class="nav-link" href="{% url 'add_listing' %}">Create Listing</a>
+                            <a class="nav-link" href="{% url 'create_listing' %}">Create Listing</a>
                         </li>
                         <li class="nav-item {% if selected == 'watchlist' %}selected{% endif %}">
                             <a class="nav-link" href="{% url 'watchlist' %}">Watchlist</a>
