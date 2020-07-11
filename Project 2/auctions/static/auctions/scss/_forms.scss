@@ -1,15 +1,23 @@
 form {
-    label {
-        width: 20vw;
-    }
 
-    input, textarea, select{
-        width: 75vw;
+    input.primary{
+        background: $primary_accent;
     }
-
+    
+    input.accent{ 
+        background: $secondary_accent;
+    }
+    
     input[type="submit"]{
         width: initial;
+        background: $primary_accent;
+        border: $primary_accent;
+
+        &:hover{
+            background: lighten($color: $primary_accent, $amount: 15%)
+        }
     }
+
 
     p{
         display: flex;
@@ -20,4 +28,9 @@ form {
             transform: translate(-100%,0);
         }
     }
+
+    & + p {
+        margin-top: $spacing_unit;
+    }
 }
+

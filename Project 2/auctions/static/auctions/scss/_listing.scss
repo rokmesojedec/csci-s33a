@@ -1,34 +1,57 @@
 $image_width : 15 * $spacing_unit;
 div.listings{
-    h3{
-        font-weight: 100;
-    }
+    @include clearfix();
+    display: block;
+    flex-wrap: wrap;
+    justify-content: space-between;
     div{
+        width: 20vw;
+        float:left;
+        margin-right: 2vh;
         padding: $spacing_unit;
         margin-bottom: $spacing_unit;
         border-radius: $spacing_unit;
-        @include clearfix();
+        background: lighten($color: $light_bg_color, $amount: 5%);
+        h3{
+            font-weight: 100;
+            margin-top: $spacing_unit;
+        }
         div.image{
-            width: $image_width;
-            height: $image_width;
+            background: $secondary_accent;
+            width: 18vw;
+            height: 18vw;
             display:flex;
             align-content: space-around;
-            float:left;
-            margin:0 $spacing_unit * 2 0 0 ;
+            margin:0 auto;
             overflow: hidden;
             padding:0;
             img{
-                width:$image_width;
+                width: 18vw;
                 align-self: center;
             }
         }
-        time{
-            font-size: x-small;
-            color: $text_gray;
-            i{
-                font-size: 14px;
-                vertical-align: sub;
-            }
-        }
+        
     }
+}
+
+time{
+    font-size: x-small;
+    color: $text_gray;
+    i, i.material-icons-outlined{
+        font-size: 14px;
+        vertical-align: sub;
+    }
+}
+
+.bid-badge {
+    background: $primary_accent;
+    font-size: $spacing_unit;
+}
+
+.listing-content{
+    margin: $spacing_unit 0;
+}
+
+.listing-jumbo{
+    @include backImage(60vh)
 }

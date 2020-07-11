@@ -19,6 +19,14 @@ a{
     color: $link_color;
 }
 
+.primary{
+    background: $primary_accent !important;
+}
+
+.accent{ 
+    background: $secondary_accent !important;
+}
+
 section.header {
     position: relative;
     padding-top: $spacing_unit *2;
@@ -29,12 +37,18 @@ section.header {
         right: $spacing_unit * 5;
     }
 
-    h1{
-        color: $primary_accent;
-        font-weight: 700;
-        span{
-            font-weight: 100;
+    h1 {
+        a{
+            color: $primary_accent;
+            font-weight: 700;
+            &:hover{
+                text-decoration: none;
+            }
+            span{
+                font-weight: 100;
+            }
         }
+        margin-bottom: $spacing_unit * 2;   
     }
     
     background: $secondary_accent;

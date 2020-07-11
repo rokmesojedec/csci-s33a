@@ -4,21 +4,32 @@
 {% block title %}Auctions{% endblock %}
 
 {% block body %}
-    <div class="listings">
-    {% for listing in listings %}
-        <div class="shadow-1">
-            <div class="image shadow-1">
-            {% if listing.image_URL %}
-                <img src="{{ listing.image_URL }}" />
-            {% else %}
-                <img src="{% static 'auctions/img/placeholder-images-image_large.png' %}" />
-            {% endif %}
+    {% if category %}
+    <div class="mt-3">
+        showing category <span class="badge badge-primary bid-badge  p-2">{{category}}</span>
+    </div>
+    {% endif %}
+    <div class="listings mt-3">
+    {% if listings %}
+        {% for listing in listings %}
+            <div class="shadow-1">
+                <div class="image shadow-1">
+                {% if listing.image_URL %}
+                    <img src="{{ listing.image_URL }}" />
+                {% else %}
+                    <img src="{% static 'auctions/img/placeholder-images-image_large.png' %}" />
+                {% endif %}
+                </div>
+                <h3><a href="{% url 'listing' listing_id=listing.id %}"> {{ listing.title }} </a></h3>
+                <strong>Price:</strong> €{{ listing.initial_bid }}
+                <p> {{ listing.description }} </p>
+                <time><i class="material-icons-outlined">schedule</i> {{ listing.created }} </time>
             </div>
-            <h3> {{ listing.title }} </h3>
-            <strong>Price:</strong> {{ listing.initial_bid }}.00€
-            <p> {{ listing.description }} </p>
-            <time><i class="material-icons-outlined">schedule</i> {{ listing.created }} </time>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    {% else %}
+        <p>
+            No items to show ...
+        </p>
+    {% endif %}
     </div>
 {% endblock %}
