@@ -3,19 +3,19 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.forms import ModelForm
 
-# using Crispy forms to generate bootstrap forms
+# Using Crispy forms to generate bootstrap forms
 # https://django-crispy-forms.readthedocs.io/en/latest/index.html
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Submit
 from crispy_forms.bootstrap import PrependedText
 
-# default date time column to now
-# source: https://stackoverflow.com/questions/2771676/django-datetime-issues-default-datetime-now
+# Default date time column to now
+# Source: https://stackoverflow.com/questions/2771676/django-datetime-issues-default-datetime-now
 
 
 class Category(models.Model):
-    """ category model """
+    """ Category model """
     title = models.CharField(max_length=256, unique=True)
 
     def __str__(self):
@@ -23,13 +23,13 @@ class Category(models.Model):
 
 
 class User(AbstractUser):
-    """ user model """
+    """ User model """
     def __str__(self):
         return f"{self.username}"
 
 
 class Listing(models.Model):
-    """ listing model """
+    """ Listing model """
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="listing_author", editable=False)
     title = models.CharField(max_length=256)
@@ -49,9 +49,9 @@ class Listing(models.Model):
 
 
 class ListingForm(ModelForm):
-    """ listing model form """
+    """ Listing model form """
     class Meta:
-        """ listing form meta class """
+        """ Listing form meta class """
         model = Listing
         fields = ["title", "description", "initial_bid", "image_URL", "category"]
     helper = FormHelper()
@@ -67,7 +67,7 @@ class ListingForm(ModelForm):
 
 
 class Bid(models.Model):
-    """ bid model """
+    """ Bid model """
     bidder = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="bid_author")
     item = models.ForeignKey(
@@ -80,9 +80,9 @@ class Bid(models.Model):
 
 
 class BidForm(ModelForm):
-    """ bid form model """
+    """ Bid form model """
     class Meta:
-        """ bid form meta class """
+        """ Bid form meta class """
         model = Bid
         fields = ["amount"]
     helper = FormHelper()
@@ -95,7 +95,7 @@ class BidForm(ModelForm):
 
 
 class Comment(models.Model):
-    """ comment model """
+    """ Comment model """
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="comment_author")
     item = models.ForeignKey(
@@ -105,9 +105,9 @@ class Comment(models.Model):
 
 
 class CommentForm(ModelForm):
-    """ comment form model """
+    """ Comment form model """
     class Meta:
-        """ comment form meta class """
+        """ Comment form meta class """
         model = Comment
         fields = ["content"]
     helper = FormHelper()

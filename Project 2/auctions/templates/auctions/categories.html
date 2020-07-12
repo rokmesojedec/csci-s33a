@@ -3,8 +3,16 @@
 {% block body %}
 <div class="mt-2">
 <h2>Categories</h2>
+{% if categories %}
+<ol>
     {% for category in categories %}
-        <a href="{% url 'category' category_id=category.id %}"><span class="badge badge-primary bid-badge  p-2">{{category}}</span></a>
+        <li>
+            <a href="{% url 'category' category_id=category.id %}">
+                <span class="badge badge-primary bid-badge  p-2">{{category}}</span>
+            </a>
+        </li>
     {% endfor %}
+</ol>
+{% endif %}
 </div>
 {% endblock %}

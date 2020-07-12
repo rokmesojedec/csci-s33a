@@ -1,4 +1,4 @@
-""" helper functions for auctions app """
+""" Helper functions for auctions app """
 from decimal import Decimal
 from .models import Comment, CommentForm, BidForm
 
@@ -16,16 +16,16 @@ def set_listing_current_bid(listings):
 
 
 def create_listing_context(request, listing):
-    """ creates context object for viewlisting template """
+    """ Creates context object for viewlisting template """
     comments = Comment.objects.filter(item=listing)
 
-    # determine if the item is on watchlist by current user
+    # Determine if the item is on watchlist by current user
     is_watchlisted = request.user.is_authenticated and len(request.user.watchlist_user.filter(id=listing.id)) > 0
 
-    # determine if current user is the creator of the listing
+    # Determine if current user is the creator of the listing
     is_owner = request.user.is_authenticated and listing.author == request.user
 
-    # determine the current_bid value by checking if listing has any
+    # Determine the current_bid value by checking if listing has any
     # related bid entries, if so, take the highest value
     # if no bids were added, then use the inital bid value
     bids = listing.bid_listing.all()
@@ -38,7 +38,7 @@ def create_listing_context(request, listing):
         current_bid = listing.initial_bid
         highest_bid_owner = False
 
-    # ternary operator source: https://book.pythontips.com/en/latest/ternary_operators.html
+    # Ternary operator source: https://book.pythontips.com/en/latest/ternary_operators.html
     context = {
         "listing": listing,
         "comment_form": CommentForm,
@@ -54,7 +54,7 @@ def create_listing_context(request, listing):
         "bids": bids
     }
 
-    # set the minimum value attribute for bid amount to either listing's initial bid
+    # Set the minimum value attribute for bid amount to either listing's initial bid
     # or highest bid. If there are existing bids, then the next bid value has to be
     # bigger by at least 0.01, if not use initial bid value
 
@@ -62,8 +62,8 @@ def create_listing_context(request, listing):
                  context["current_bid"] + Decimal(0.01))[context["current_bid"] is not listing.initial_bid]
     BidForm.helper.layout[0].attrs['min'] = min_value
 
-    # round the value to remove the float conversion imprecision
+    # Round the value to remove the float conversion imprecision
     BidForm.helper.layout[0].attrs['value'] = round(min_value, 2)
 
-    # prepare context dict. Used to pass data to template
+    # Prepare context dict. Used to pass data to template
     return context

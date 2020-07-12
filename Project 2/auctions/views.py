@@ -1,4 +1,4 @@
-"""views for auctions app"""
+"""Views for auctions app"""
 from decimal import Decimal
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -11,7 +11,7 @@ from .util import set_listing_current_bid, create_listing_context
 
 
 def index(request):
-    """Returns index page populated with listings from Listing db table """
+    """ Returns index page populated with listings from Listing db table """
     listings = set_listing_current_bid(Listing.objects.filter(is_active=True))
     return render(request, "auctions/index.html", {
         "listings": listings,
@@ -44,13 +44,13 @@ def watchlist(request):
 
 
 def view_listing(request, listing_id):
-    """ returns individula listing view and process POST requests """
+    """ Returns individual listing view and process POST requests """
     listing = get_object_or_404(Listing, id=listing_id)
-    # prepare context dict. Used to pass data to template
+    # Prepare context dict. Used to pass data to template
     context = create_listing_context(request, listing)
 
     if request.method == "POST":
-        # if user clicked watchlist button
+        # If user clicked watchlist button
         # we first have to check if user is authenticated, if not display message
         if "watchlist_submit" in request.POST:
             if not request.user.is_authenticated:
@@ -76,13 +76,13 @@ def view_listing(request, listing_id):
 
 
 def post_comment(request, listing_id):
-    """ posts a comment and returns the listing view """
+    """ Posts a comment and returns the listing view """
     listing = get_object_or_404(Listing, id=listing_id)
-    # prepare context dict. Used to pass data to template
+    # Prepare context dict. Used to pass data to template
     context = create_listing_context(request, listing)
 
-    # if user posted a comment, we check if comment can be posted
-    # if so then we create new comment entry
+    # If user posted a comment, we check if comment can be posted
+    # If so then we create new comment entry
     if request.method == "POST" and "post_comment" in request.POST:
         if not request.user.is_authenticated:
             context["message"] = "You need to be logged in to comment."
@@ -99,12 +99,12 @@ def post_comment(request, listing_id):
 
 
 def place_bid(request, listing_id):
-    """ places a bid on a listing """
-    listing = get_object_or_404(Listing, id=listing_id)
-    # prepare context dict. Used to pass data to template
+    """ Places a bid on a listing """
+    lipsting = get_object_or_404(Listing, id=listing_id)
+    # Prepare context dict. used to pass data to template
     context = create_listing_context(request, listing)
 
-    # if user places a bid
+    # If user places a bid
     if request.method == "POST" and "place_bid" in request.POST:
         if not request.user.is_authenticated:
             context["message"] = "You need to be logged in to place a bid."
@@ -114,7 +114,7 @@ def place_bid(request, listing_id):
             return render(request, "auctions/viewlisting.html", context)
         amount = Decimal(request.POST.get("amount"))
 
-        # we need to validate bid also on the server side
+        # We need to validate bid also on the server side
         # if there are no bids, the bid needs to be greater or equal
         # to initial bid. If there are bid, the bid needs to be greater
         # than last bid
@@ -126,7 +126,7 @@ def place_bid(request, listing_id):
             context["message"] = "Bid needs to be greater than current bid"
             return render(request, "auctions/viewlisting.html", context)
 
-        # if amount passes validation, then we post the bid
+        # If amount passes validation, then we post the bid
         bid = BidForm(request.POST)
         bid = bid.save(commit=False)
         bid.bidder = request.user
@@ -138,11 +138,11 @@ def place_bid(request, listing_id):
 
 @login_required(login_url="/login")
 def create_listing(request):
-    """ creates listing via POST method """
+    """ Creates listing via POST method """
     if request.method == "POST":
         new_listing = ListingForm(request.POST)
-        # save form without commiting so that current user is added as author
-        # source:
+        # Save form without commiting so that current user is added as author
+        # Technique source:
         # https://stackoverflow.com/questions/27192251/set-value-of-excluded-field-in-django-modelform-programmatically
         new_listing = new_listing.save(commit=False)
         new_listing.author = request.user
@@ -155,7 +155,7 @@ def create_listing(request):
 
 
 def login_view(request):
-    """ logs in user """
+    """ Logs in user """
     context = {"selected": "login"}
     if request.method == "POST":
 
@@ -176,13 +176,13 @@ def login_view(request):
 
 
 def logout_view(request):
-    """ logs out user """
+    """ Logs out user """
     logout(request)
     return HttpResponseRedirect(reverse("index"))
 
 
 def register(request):
-    """ creates user account """
+    """ Creates user account """
     context = {"selected": "register"}
     if request.method == "POST":
         username = request.POST["username"]

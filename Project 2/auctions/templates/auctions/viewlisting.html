@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block body %}
-    {# if user provided image url, then show jumbotron image on page, otherwise show only listing title#}
+    {# If user provided image url, then show jumbotron image on page, otherwise show only listing title #}
     {% if listing.image_URL %}
         <div class="listing-jumbo" style="background-image:url({{listing.image_URL}})">
             <div>
@@ -22,7 +22,7 @@
         </div>
     {% endif %}
     <div class="listing-content">
-        {# Show bid, watchlist, close bid controls if user is authenticated and is listing is still actvie#}
+        {# Show bid, watchlist, close bid controls if user is authenticated and is listing is still active #}
         {% if listing.is_active and user.is_authenticated %}
         <form action="{% url 'listing' listing_id=listing.id %}" method="POST"> 
             {% csrf_token %}
@@ -70,7 +70,7 @@
             <small>posting as: <strong>{{user.username}}</strong></small>
         </form>
    {% endif %}
-   {# show comments section only if there are any comments in db#}
+   {# Show comments section only if there are any comments in db#}
    {% if comments %}
     <div class="mt-4">
             <h2>Comments</h2>

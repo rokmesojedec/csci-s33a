@@ -6,6 +6,10 @@ body {
     }
 }
 
+ol li {
+    margin-bottom: $spacing_unit;
+}
+
 h1,h2,h3,h4,h5,h6{
     color: $secondary_accent;
     font-family: Roboto, sans-serif;
