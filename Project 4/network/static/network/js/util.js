@@ -7,20 +7,19 @@ const api = {
     posts: {
         PUT: (id) => { return `/posts/${id}`; },
         edit: {
-            GET: (id) => { return `/edit/${id}` }
+            GET: (id) => { return `/edit/${id}`; }
         }
     },
     user: {
-        GET: (id) => { return `/user/${id}` },
+        GET: (id) => { return `/user/${id}`; },
         follow: {
-            PUT: (id) => { return `/user/${id}/follow` }
+            PUT: (id) => { return `/user/${id}/follow`; }
         },
         followers: {
-            GET: (id) => { return `/user/${id}/followers` }
+            GET: (id) => { return `/user/${id}/followers`; }
         }
     }
 };
-
 
 /**
  * Generates a DOM element with optional child elements and attributes. Function can be nested in itself
