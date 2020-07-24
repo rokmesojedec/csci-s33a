@@ -1,0 +1,13 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+    {% csrf_token %}
+    {{ profile.username }}
+    followers: {{ followers }}
+    following: {{ following }}
+    {% if not is_you %}
+        <button data-id="{{profile.id}}">{{ is_following|yesno:"Unfollow,Follow,Error" }}</button>
+    {% endif%}
+    <script src="{% static 'network/js/profile.js'%}"></script>
+{% endblock %}
