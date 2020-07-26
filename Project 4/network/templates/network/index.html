@@ -4,10 +4,10 @@
 {% block body %}
     {% if profile %}
         {% csrf_token %}
-        <table class="mt-4">
+        <table class="mt-3">
             <tr>
                 <td colspan="2"><h2>{{ profile.username }}</h2>
-                    {% if not is_you %}
+                    {% if not is_you and user.is_authenticated %}
                         <button data-id="{{profile.id}}" class="follow">{{ is_following|yesno:"Unfollow,Follow,Error" }}</button>
                     {% endif%}
                 </td>
@@ -32,15 +32,17 @@
             </tr>
         </table>
     {% else%}
-        {% if user.is_authenticated%}
+        {% if user.is_authenticated and selected != "following" %}
         <form action="{% url 'posts'%}" method="post" class="mt-3">
             {% load crispy_forms_tags %}
             {% crispy form %}
         </form>
+        {% else %}
+            {% csrf_token %}
         {% endif %}
     {% endif %}
     {% if page_obj %}
-        <div class="posts {% if not user.is_authenticated %} mt-3{% endif %}">
+        <div class="posts {% if not user.is_authenticated and profile is null or selected == 'following' %} mt-3{% endif %}">
         {% for post in page_obj %}
             <div>
                 <strong><a href="{% url 'user' user_id=post.author.id %}">{{post.author.username}}</a></strong>

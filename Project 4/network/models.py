@@ -7,7 +7,6 @@ from django.forms import ModelForm
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Submit
-from crispy_forms.bootstrap import PrependedText
 
 
 class User(AbstractUser):

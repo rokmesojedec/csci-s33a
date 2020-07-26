@@ -1,10 +1,12 @@
-# Project 2 for CSIC S33-a
+# Project 4 for CSIC S33-a
 Author: **Rok Mesojedec (rom0137@g.harvard.edu)**
 
 ## References
 Bootstrap pagination [https://getbootstrap.com/docs/4.4/components/pagination/]
 Django pagination [https://docs.djangoproject.com/en/3.0/topics/pagination/]
 Emoji codes [https://www.alt-codes.net/heart_alt_code.php]
+Django many-to-many relations [https://docs.djangoproject.com/en/3.0/topics/db/examples/many_to_many/]
+
 
 ## Installation
 
