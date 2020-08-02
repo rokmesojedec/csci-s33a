@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Computed Art{% endblock %}</title>
+        <link href="{% static 'computedart/css/styles.css' %}" rel="stylesheet">
+    </head>
+    <body>
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Computed Art</a>
+            <div>
+              <ul class="navbar-nav mr-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <strong>{{ user.username }}</strong>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                  <a class="nav-link{% if selected == 'index' %} selected{% endif %}" href="{% url 'index' %}" >Configurations</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link{% if selected == 'myconfig' %} selected{% endif %}" href="" >My configurations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link{% if selected == 'createconfig' %} selected{% endif %}" href="{% url 'create' %}" >New Configuration</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}" >Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                {% endif %}
+              </ul>
+            </div>
+          </nav>
+        
+        <div class="body">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

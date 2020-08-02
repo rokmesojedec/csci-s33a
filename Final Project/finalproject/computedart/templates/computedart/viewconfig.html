@@ -1,0 +1,11 @@
+{% extends "computedart/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <input type="hidden" id="config_id" value="{{ config_id }}" />
+    <canvas></canvas>
+    <script src="{% static 'computedart/js/utils.js' %}"></script>
+    <script src="{% static 'computedart/js/square.js' %}"></script>
+
+    <script src="{% static 'computedart/js/viewconfig.js' %}"></script>
+{% endblock %}

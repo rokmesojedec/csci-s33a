@@ -1,0 +1,29 @@
+.selected{
+    color: $blue !important;
+    font-weight: bold;
+}
+
+button{
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    padding: 0;
+    color: $blue;
+    font-size:smaller;
+    &:focus {
+        outline: none;
+    }
+    &:hover{
+        color: lighten($blue, 15%)
+    }
+    & + button {
+        margin-left: $unit;
+    }
+}
+
+.body{
+    & > div, & > h2{
+        width:50%;
+        margin: 0 auto;
+    }
+}
