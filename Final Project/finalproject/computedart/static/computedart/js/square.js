@@ -96,7 +96,7 @@ class Square {
             }
             this.drawShape({ shape: "square", color: color1 });
             this.drawShape({ shape: "circle", color: color2 });
-        } else if (false){
+        } else if (Math.random() <= Square.fourPartElementChance){
             this.drawShape({ shape: "top", color: this.getColor() });
             this.drawShape({ shape: "left", color: this.getColor() });
             this.drawShape({ shape: "bottom", color: this.getColor() });
@@ -191,4 +191,5 @@ Square.heightEnd = null; // defines the vertical end of coordinate system
 Square.colors = []; // color pallet used in drawing
 Square.takenSpace = []; // marks taken spots
 Square.circleChance = 0; // chance of drawing a circle element
+Square.fourPartElementChance = 1; // chance of rendering 4 part element as opposed to two part
 Square.inheritColorChance = 1; // chance of inhereting color of previous element

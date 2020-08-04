@@ -4,7 +4,7 @@
     // divides the canvas in to grid, with each grid unit corresponding to size defined in Square
     // the algorithm then fills the canvas grid with instances of Square class - each one defining 
     // shape, colors of each grid unit - until whole canvas is filled
-    let drawImage = function(animate, colors, size, width, height, circleChance, colorChance){
+    let drawImage = function(animate, colors, size, width, height, circleChance, colorChance, fourPartChance){
         const canvasWidth = width * size;
         const canvasHeight = height * size;
 
@@ -23,6 +23,7 @@
         Square.circleChance = circleChance;
         Square.inheritColorChance = colorChance;
         Square.takenSpace.length = 0;
+        Square.fourPartElementChance = fourPartChance;
 
         // prepares canvas context, prefills it with gray color
         ctx.lineWidth = 1;
@@ -82,7 +83,7 @@
         // gets config from server
         ajax("GET", api.config.json.GET(id)).then(data=>{
             document.querySelector(".config-data code").innerHTML = JSON.stringify(data, null, 1);
-            let { colors, circleChance, colorChance, size, width, height, animate } = data;
+            let { colors, circleChance, colorChance, fourPartChance, size, width, height, animate } = data;
             let saveButton = document.querySelector("button.save");
 
             // processes config data, makes sure it's in right data type
@@ -92,14 +93,15 @@
             height = parseInt(height);
             circleChance = parseInt(circleChance) * 0.01;
             colorChance = parseInt(colorChance) * 0.01;
+            fourPartChance = parseInt(fourPartChance) * 0.01;
 
             // draws image
-            drawImage(animate, colors, size, width, height, circleChance, colorChance);
+            drawImage(animate, colors, size, width, height, circleChance, colorChance, fourPartChance);
            
             // adds onclick for regenrating the image
             let regenerateButton = document.querySelector("button.regen");
                 regenerateButton.onclick = function(event){
-                    drawImage(animate, colors, size, width, height, circleChance, colorChance);
+                    drawImage(animate, colors, size, width, height, circleChance, colorChance, fourPartChance);
                 };
 
             // save image event

@@ -53,7 +53,7 @@ def showcase(request):
 def user_configs(request, user_id):
     """ Returns configs authored by specified user """
     user = get_object_or_404(User, id=user_id)
-    configs = Configuration.objects.filter(author=user)
+    configs = Configuration.objects.filter(author=user).order_by("-created")
     process_configs(configs)
     context = {"configs": configs}
     context["selected"] = ("configurations", "myconfig")[user == request.user]
@@ -71,9 +71,13 @@ def create_config(request):
         config.title = request.POST["title"]
         config.circle_chance = request.POST["circle_chance"]
         config.color_chance = request.POST["color_chance"]
+        config.four_part_chance = request.POST["four_part_chance"]
         config.animate = (False, True)[request.POST.get("animate", False) == "on"]
         config.author = request.user
         config.save()
+
+        # there can be 2 to n number of colors passed, therefore we have to loop through all 
+        # and save each as related entities 
         for key in request.POST:
             if key.startswith("color-"):
                 color = Color()
@@ -87,6 +91,7 @@ def create_config(request):
         {"selected": "createconfig", "form": ConfigurationForm},
     )
 
+
 @login_required
 def upload(request, config_id):
     """ Uploads an images to an exisiting config object via PUT"""
@@ -99,6 +104,7 @@ def upload(request, config_id):
     if config.author != request.user:
         return HttpResponseForbidden()
 
+    # takes image data encoded in base64 and stores it in file system
     data = json.loads(request.body)
     image = data.get("image")
     format, imgstr = image.split(";base64,")
@@ -117,10 +123,10 @@ def view_config(request, config_id):
         request,
         "computedart/viewconfig.html",
         {
-            "selected": "createconfig", 
+            "selected": "createconfig",
             "config_id": config.id,
             "is_author": config.author == request.user,
-            "is_saved" : config.image_file != ""
+            "is_saved": config.image_file != "",
         },
     )
 
@@ -137,7 +143,8 @@ def get_config(request, config_id):
         "height": config.grid_height,
         "animate": config.animate,
         "circleChance": config.circle_chance,
-        "colorChance": config.color_chance
+        "colorChance": config.color_chance,
+        "fourPartChance": config.four_part_chance,
     }
 
     colors = []

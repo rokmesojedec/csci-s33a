@@ -16,6 +16,7 @@ class User(AbstractUser):
 
 class Configuration(models.Model):
     """ Configuartion Model """
+
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="listing_author", editable=False
     )
@@ -35,6 +36,9 @@ class Configuration(models.Model):
     color_chance = models.PositiveSmallIntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(100)]
     )
+    four_part_chance = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(0), MaxValueValidator(100)]
+    )
     created = models.DateTimeField(auto_now_add=True, blank=True)
     image_file = models.ImageField(upload_to="images/%Y/%m/%d/", blank=True, null=True)
     animate = models.BooleanField()
@@ -51,6 +55,7 @@ class ConfigurationForm(ModelForm):
         self.fields["animate"].initial = False
         self.fields["circle_chance"].initial = 0
         self.fields["color_chance"].initial = 0
+        self.fields["four_part_chance"].initial = 100
 
     class Meta:
         """ Post form meta class """
@@ -63,7 +68,8 @@ class ConfigurationForm(ModelForm):
             "grid_height",
             "animate",
             "circle_chance",
-            "color_chance"
+            "color_chance",
+            "four_part_chance",
         ]
         labels = {
             "square_size": "Square Size (in px)",
@@ -72,11 +78,13 @@ class ConfigurationForm(ModelForm):
             "animate": "Animate Rendering",
             "circle_chance": "% Chance that a circle shape is rendered. 0 won't render any circles.",
             "color_chance": "% Chance that color is inhereted from previous element. 0 means color is always picked randomly",
+            "four_part_chance": "% Chance that a non-circle element will contain 4 sub-parts. 0 means that element will contain 2 sub-parts",
         }
 
 
 class Color(models.Model):
     """ Color Model """
+
     configuration = models.ForeignKey(
         Configuration, on_delete=models.CASCADE, related_name="config_color"
     )
