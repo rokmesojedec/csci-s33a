@@ -4,6 +4,9 @@ const api = {
         create : `/config/create/`,
         json: {
             GET: (id) => `/config/json/${id}`
+        },
+        upload: {
+            POST: (id) => `/config/${id}/upload`
         }
     }
 };

@@ -2,10 +2,28 @@
 {% load static %}
 
 {% block body %}
-    <input type="hidden" id="config_id" value="{{ config_id }}" />
-    <canvas></canvas>
+    <div class="container">
+        <input type="hidden" id="config_id" value="{{ config_id }}" />
+        {% csrf_token %}
+
+        <div class="text-center mt-2 mb-2">
+            <button class="regen btn btn-primary">Regenerate</button>
+            {% if is_author %}
+                <button disabled="disabled" class="save btn btn-primary">
+                    {% if is_saved %}
+                        Resave Image on Server
+                    {% else %}
+                        Save Image on Server
+                    {% endif %}
+                </button>
+            {% endif %}
+        </div>
+    
+        <canvas></canvas>
+        <h3 class="mt-4">Configuration</h3>
+        <pre class="config-data pre-scrollable"><code><code></pre>
+    </div>
     <script src="{% static 'computedart/js/utils.js' %}"></script>
     <script src="{% static 'computedart/js/square.js' %}"></script>
-
     <script src="{% static 'computedart/js/viewconfig.js' %}"></script>
 {% endblock %}

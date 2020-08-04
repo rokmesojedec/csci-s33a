@@ -1,46 +1,59 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <title>{% block title %}Computed Art{% endblock %}</title>
         <link href="{% static 'computedart/css/styles.css' %}" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     </head>
     <body>
-   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Computed Art</a>
-            <div>
-              <ul class="navbar-nav mr-auto">
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <strong>{{ user.username }}</strong>
-                    </li>
-                {% endif %}
-                <li class="nav-item">
-                  <a class="nav-link{% if selected == 'index' %} selected{% endif %}" href="{% url 'index' %}" >Configurations</a>
-                </li>
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link{% if selected == 'myconfig' %} selected{% endif %}" href="" >My configurations</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link{% if selected == 'createconfig' %} selected{% endif %}" href="{% url 'create' %}" >New Configuration</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}" >Log In</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register' %}">Register</a>
-                    </li>
-                {% endif %}
-              </ul>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'showcase' %}"><span>COMPUTED</span>ART</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                    <ul class="navbar-nav mr-auto">
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <strong>{{ user.username }}</strong>
+                            </li>
+                        {% endif %}
+                        <li class="nav-item">
+                        <a class="nav-link{% if selected == 'configurations' %} selected{% endif %}" href="{% url 'config' %}" >Configurations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link{% if selected == 'showcase' %} selected{% endif %}" href="{% url 'showcase' %}" >Showcase</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link{% if selected == 'myconfig' %} selected{% endif %}" href="{% url 'user_configs' user_id=user.id %}" >My configurations</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link{% if selected == 'createconfig' %} selected{% endif %}" href="{% url 'create' %}" >New Configuration</a>
+                            </li>                
+                        {% endif %}
+                    </ul>
+                    <ul class="navbar-nav"> 
+                        {% if not user.is_authenticated%}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'login' %}" >Log In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'register' %}">Register</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                            </li>
+                        {% endif%}
+                    </ul>
+                </div>
             </div>
-          </nav>
-        
+        </nav>
         <div class="body">
             {% block body %}
             {% endblock %}

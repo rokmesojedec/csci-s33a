@@ -86,6 +86,14 @@ DATABASES = {
 
 AUTH_USER_MODEL = "computedart.User"
 
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
+
+# URL that handles the media served from MEDIA_ROOT. 
+MEDIA_URL = '/media/'
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 

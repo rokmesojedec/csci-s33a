@@ -9,39 +9,75 @@ from django.forms import ModelForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Submit
 
+
 class User(AbstractUser):
     pass
 
+
 class Configuration(models.Model):
+    """ Configuartion Model """
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="listing_author", editable=False
     )
     title = models.CharField(max_length=256)
-    grid = models.PositiveSmallIntegerField(validators=[MinValueValidator(4),
-                                       MaxValueValidator(200)])
+    square_size = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(4), MaxValueValidator(200)]
+    )
+    grid_width = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(1000)]
+    )
+    grid_height = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(1000)]
+    )
+    circle_chance = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(0), MaxValueValidator(100)]
+    )
+    color_chance = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(0), MaxValueValidator(100)]
+    )
     created = models.DateTimeField(auto_now_add=True, blank=True)
+    image_file = models.ImageField(upload_to="images/%Y/%m/%d/", blank=True, null=True)
+    animate = models.BooleanField()
 
 
 class ConfigurationForm(ModelForm):
     """ Configuratio  model form """
 
+    def __init__(self, *args, **kwargs):
+        super(ConfigurationForm, self).__init__(*args, **kwargs)
+        self.fields["square_size"].initial = 24
+        self.fields["grid_width"].initial = 32
+        self.fields["grid_height"].initial = 16
+        self.fields["animate"].initial = False
+        self.fields["circle_chance"].initial = 0
+        self.fields["color_chance"].initial = 0
+
     class Meta:
         """ Post form meta class """
 
         model = Configuration
-        fields = ["title", "grid"]
-
-    helper = FormHelper()
-    helper.form_class = "form-group"
-    helper.form_show_labels = True
-    helper.layout = Layout(
-        Field("title", css_class="form-control mt-2 mb-3"),
-        Field("grid", css_class="form-control mb-3")
-    )
+        fields = [
+            "title",
+            "square_size",
+            "grid_width",
+            "grid_height",
+            "animate",
+            "circle_chance",
+            "color_chance"
+        ]
+        labels = {
+            "square_size": "Square Size (in px)",
+            "grid_width": "Grid Width (number of squares)",
+            "grid_height": "Grid Height (number of squares)",
+            "animate": "Animate Rendering",
+            "circle_chance": "% Chance that a circle shape is rendered. 0 won't render any circles.",
+            "color_chance": "% Chance that color is inhereted from previous element. 0 means color is always picked randomly",
+        }
 
 
 class Color(models.Model):
-    configuration  = models.ForeignKey(
-        Configuration, on_delete=models.CASCADE, related_name="config_color")
+    """ Color Model """
+    configuration = models.ForeignKey(
+        Configuration, on_delete=models.CASCADE, related_name="config_color"
+    )
     color = models.CharField(max_length=100)
-

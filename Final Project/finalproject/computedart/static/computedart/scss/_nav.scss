@@ -1,0 +1,18 @@
+nav.navbar {
+    background: black !important;
+    color: white;
+    .navbar-brand{
+        span{
+            font-weight: 800;
+        }
+        font-weight: 400;
+        color: $red !important;
+    }
+    .nav-item a.nav-link{
+        color: white;
+        text-transform: lowercase;
+        &:hover{
+            color: rgba(255, 255, 255, 0.527);
+        }
+    }
+}

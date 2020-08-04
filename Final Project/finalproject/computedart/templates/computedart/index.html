@@ -2,6 +2,47 @@
 
 {% block body %}
     <div>
-        <h1> Hello Index </h1>
+       {% if configs %}
+       <table class="table table-condensed">
+         <tr>
+            {% if selected != "myconfig" %}
+                <th>Author</th>
+            {% endif %}
+            <th>Title</th>
+            <th>Created</th>
+            <th>Colors</th>
+            <th>Size</th>
+            <th>File</th>
+            <th></th>
+         </tr>
+         {% for config in configs %}
+         <tr>
+            {% if selected != "myconfig" %}
+                <td><a href="{% url 'user_configs' user_id=config.author.id %}">{{config.author.username}}</a></td>
+            {% endif %}
+            <td>{{config.title}}</td>
+            <td>{{config.created}}</td>
+            <td class="colors-cell">
+                {% for color in config.colors %}
+                    <div class="color-icon" style="background-color: {{ color.color }}" title="{{ color.color }}"></div>
+                {% endfor %}
+            </td>
+            <td>
+                {{ config.image_width }}px * {{ config.image_height }}px
+            </td>
+            <td>
+                {% if config.image_file %}
+                    <a href="{{ config.image_file.url }}" >Image</a>
+                {% endif %}
+            </td>
+            <td>
+                <a href="{% url 'config' config_id=config.id %}">Generate</a>
+            </td>
+         </tr>
+         {% endfor %}
+       </table>
+       {% else %}
+       <h2>No configurations found ...</h2>
+       {% endif %}
     </div>
 {% endblock %}
