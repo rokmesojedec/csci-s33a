@@ -1,18 +1,38 @@
-asgiref==3.2.7
-astroid @ file:///opt/concourse/worker/volumes/live/b22b518b-f584-4586-5ee9-55bfa4fca96e/volume/astroid_1592495912194/work
+appdirs==1.4.4
+asgiref==3.2.10
+astroid==2.4.2
+attrs==19.3.0
+autopep8==1.5.3
+black==19.10b0
 certifi==2020.6.20
-Django==3.0.3
-django-crispy-forms==1.9.1
+cffi==1.14.0
+chardet==3.0.4
+click==7.1.2
+cryptography==2.9.2
+Django==3.0.7
+django-crispy-forms==1.9.2
+idna==2.10
 isort==4.3.21
+jellyfish==0.8.2
 lazy-object-proxy==1.4.3
-markdown2==2.3.8
+lib50==2.0.8
+markdown2==2.3.9
 mccabe==0.6.1
-Pillow==7.2.0
+pathspec==0.8.0
+pexpect==4.8.0
+ptyprocess==0.6.0
 pycodestyle==2.6.0
-pylint @ file:///opt/concourse/worker/volumes/live/42ede439-2571-4cb2-513c-394625d2381b/volume/pylint_1592496039330/work
+pycparser==2.20
+pylint==2.5.3
 pytz==2020.1
+PyYAML==5.3.1
+regex==2020.7.14
+requests==2.24.0
 six==1.15.0
 sqlparse==0.3.1
-toml @ file:///tmp/build/80754af9/toml_1592853716807/work
+submit50==3.0.2
+termcolor==1.1.0
+toml==0.10.1
 typed-ast==1.4.1
-wrapt==1.11.2
+urllib3==1.25.9
+wrapt==1.12.1
