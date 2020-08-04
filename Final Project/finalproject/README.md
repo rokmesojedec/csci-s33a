@@ -16,8 +16,8 @@ Canvas image can be saved to the server and showcased on the main app page.
 The script will produce an image from user adjusted parameters. Each generated image is unique and drawn while applying a set of
 rules with chance and probabilities. This means that the chance of producing the same image from the same parameters is highly unlikely due the to probabilistic nature of this software.
 
-- This project was inspired by computer generated arts and ideas of (Dr Edvard Zajec)[http://www.mg-lj.si/si/obisk/2506/in-memoriam-edvard-zajec-1938-2018/]
-- [https://www.atariarchives.org/artist/sec16.php]
+- This project was inspired by computer generated arts and ideas of [Dr Edvard Zajec](http://www.mg-lj.si/si/obisk/2506/in-memoriam-edvard-zajec-1938-2018/)
+- (https://www.atariarchives.org/artist/sec16.php)
 
 ## Project Files
 
